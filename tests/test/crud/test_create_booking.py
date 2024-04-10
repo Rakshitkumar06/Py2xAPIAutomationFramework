@@ -1,11 +1,13 @@
+import allure
+import pytest
+
 from src.constants.api_constants import APIConstants
 from src.helpers.api_requests_wrapper import post_request
-from src.helpers.common_verification import verify_http_status_code, verify_json_key_for_not_null
+from src.helpers.common_verification import verify_http_status_code, verify_json_key_for_not_null, \
+    verify_json_key_for_not_null_token
 from src.helpers.payload_manager import payload_create_booking
 from src.utils.utils import Util
 
-import allure
-import pytest
 
 class TestCreateBooking(object):
     @pytest.mark.positive
@@ -29,4 +31,6 @@ class TestCreateBooking(object):
         # URL, Headers, Payload,
         response = post_request(url=APIConstants.url_create_booking(), auth=None, headers=Util().common_headers_json(),
                                 payload={}, in_json=False)
+        # ER == AR
+        # 500 == 500
         verify_http_status_code(response, 500)
